@@ -9,3 +9,7 @@ export async function getMeals() {
 
   return meals;
 }
+
+export function getMeal(mealId: string) {
+  return db.prepare("SELECT * from meals where slug = ?").get(mealId) as MealItem;
+}
