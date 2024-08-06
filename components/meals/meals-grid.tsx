@@ -3,12 +3,13 @@ import classes from "./meals-grid.module.css";
 export type MealItem = {
   title: string;
   slug: string;
-  image: string;
+  image: File;
   summary: string;
   creator: string;
   id: string;
   creator_email: string;
   instructions: string;
+  path: string;
 };
 
 export default function MealsGrid({ meals }: { meals: MealItem[] }) {
