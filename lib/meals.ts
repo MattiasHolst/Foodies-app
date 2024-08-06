@@ -6,7 +6,6 @@ import fs from "node:fs";
 
 const db = sql("meals.db");
 
-
 export async function getMeals() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const meals = db.prepare("SELECT * from meals").all() as MealItem[];
@@ -41,7 +40,15 @@ export async function saveMeal(meal: MealItem) {
     `
   INSERT INTO meals
     (title, summary, instructions, creator, creator_email, image, slug)
-    VALUES (@title, @summary, @instructions, @creator, @creator_email, @path, @slug)
+    VALUES (?, ?, ?, ?, ?, ?, ?)
   `
-  ).run(meal);
+  ).run(
+    meal.title,
+    meal.summary,
+    meal.instructions,
+    meal.creator,
+    meal.creator_email,
+    meal.path,
+    meal.slug
+  );
 }
